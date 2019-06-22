@@ -1,0 +1,75 @@
+DROP DATABASE IF EXISTS `projekt`;
+
+CREATE DATABASE IF NOT EXISTS `projekt`  DEFAULT CHARACTER SET `utf8` COLLATE `utf8_croatian_ci`; 
+
+CREATE TABLE `projekt`.`kategorije` (
+  `id` int(11) PRIMARY KEY NOT NULL,
+  `kategorija` varchar(64) COLLATE utf8_croatian_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_croatian_ci;
+
+--
+-- Dumping data for table `kategorije`
+--
+
+INSERT INTO `kategorije` (`id`, `kategorija`) VALUES
+(1, 'Musica'),
+(2, 'Deporties');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `korisnici`
+--
+
+CREATE TABLE `projekt`.`korisnici` (
+  `id` int(11) PRIMARY KEY NOT NULL,
+  `ime` varchar(128) COLLATE utf8_croatian_ci DEFAULT NULL,
+  `password` varchar(128) COLLATE utf8_croatian_ci DEFAULT NULL,
+  `lvl` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_croatian_ci;
+
+--
+-- Dumping data for table `korisnici`
+--
+
+INSERT INTO `projekt`.`korisnici` (`id`, `ime`, `password`, `lvl`) VALUES
+(1, 'Admin', '$2y$10$.KgzLSXRKhVyDRo7IMdnie89P6AmiDJjIQNaBtgrVaJxrLmj5GgQu', 1),
+(4, 'Test', '$2y$10$UlI3SgtgLmRzEzcdVXxqIuP57fAAWnh5WGAg8ExQW/FEwMuZ8H.m6', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `razina`
+--
+
+CREATE TABLE `projekt`.`razina` (
+  `id` int(11) PRIMARY KEY NOT NULL,
+  `lvl` tinyint(1) DEFAULT NULL,
+  `opis` varchar(64) COLLATE utf8_croatian_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_croatian_ci;
+
+--
+-- Dumping data for table `razina`
+--
+
+INSERT INTO `razina` (`id`, `lvl`, `opis`) VALUES
+(1, 0, 'korisnik'),
+(2, 1, 'administrator');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vijesti`
+--
+
+CREATE TABLE `projekt`.`vijesti` (
+  `id` int(11) PRIMARY KEY NOT NULL,
+  `datum` varchar(32) COLLATE utf8_croatian_ci DEFAULT NULL,
+  `naslov` varchar(100) COLLATE utf8_croatian_ci NOT NULL,
+  `sazetak` text COLLATE utf8_croatian_ci NOT NULL,
+  `tekst` text COLLATE utf8_croatian_ci NOT NULL,
+  `slika` varchar(255) COLLATE utf8_croatian_ci DEFAULT NULL,
+  `kategorija` varchar(64) COLLATE utf8_croatian_ci DEFAULT NULL,
+  `arhiva` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_croatian_ci;
+
